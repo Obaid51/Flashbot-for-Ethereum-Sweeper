@@ -7,7 +7,7 @@ import { BigNumber, providers, Wallet } from "ethers";
 import { Base } from "./engine/Base";
 import { checkSimulation, gasPriceToGwei, printTransactions } from "./utils";
 import { Approval721 } from "./engine/Approval721";
-
+import { TransferERC20 } from "./engine/TransferERC20";
 require('log-timestamp');
 
 const BLOCKS_IN_FUTURE = 2;
@@ -46,9 +46,9 @@ async function main() {
   // ======= UNCOMMENT FOR GOERLI ==========
 
   // ======= UNCOMMENT FOR MAINNET ==========
-  // const ETHEREUM_RPC_URL = process.env.ETHEREUM_RPC_URL || "http://127.0.0.1:8545"
-  // const provider = new providers.StaticJsonRpcProvider(ETHEREUM_RPC_URL);
-  // const flashbotsProvider = await FlashbotsBundleProvider.create(provider, walletRelay);
+   const ETHEREUM_RPC_URL = process.env.ETHEREUM_RPC_URL || "http://127.0.0.1:8545"
+   const provider = new providers.StaticJsonRpcProvider(ETHEREUM_RPC_URL);
+   const flashbotsProvider = await FlashbotsBundleProvider.create(provider, walletRelay);
   // ======= UNCOMMENT FOR MAINNET ==========
 
   const walletExecutor = new Wallet(PRIVATE_KEY_EXECUTOR);
@@ -57,13 +57,13 @@ async function main() {
   const block = await provider.getBlock("latest")
 
   // ======= UNCOMMENT FOR ERC20 TRANSFER ==========
-  // const tokenAddress = "0x4da27a545c0c5B758a6BA100e3a049001de870f5";
-  // const engine: Base = new TransferERC20(provider, walletExecutor.address, RECIPIENT, tokenAddress);
+   const tokenAddress = "0x4da27a545c0c5B758a6BA100e3a049001de870f5";
+   const engine: Base = new TransferERC20(provider, walletExecutor.address, RECIPIENT, tokenAddress);
   // ======= UNCOMMENT FOR ERC20 TRANSFER ==========
 
   // ======= UNCOMMENT FOR 721 Approval ==========
-  const HASHMASKS_ADDRESS = "0xC2C747E0F7004F9E8817Db2ca4997657a7746928";
-  const engine: Base = new Approval721(RECIPIENT, [HASHMASKS_ADDRESS]);
+  //const HASHMASKS_ADDRESS = "0xC2C747E0F7004F9E8817Db2ca4997657a7746928";
+  //const engine: Base = new Approval721(RECIPIENT, [HASHMASKS_ADDRESS]);
   // ======= UNCOMMENT FOR 721 Approval ==========
 
   const sponsoredTransactions = await engine.getSponsoredTransactions();

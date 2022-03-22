@@ -1,20 +1,20 @@
-searcher-sponsored-tx
-=======================
-This repository contains a simple Flashbots "searcher" for submitting a transaction from an `executor` account, but paying for the transaction from a `sponsor` account. This is accomplished by submitting a Flashbots transaction bundle, with the first "sponsor" transaction paying the "executor" wallet in ETH, followed by a series of `executor` transactions that spend this newly received ETH on gas fees.
 
-We hope you will use this repository as an example of how to integrate Flashbots into your own Flashbot searcher (bot). For more information, see the [Flashbots Searcher Quick Start](https://docs.flashbots.net/flashbots-auction/searchers/quick-start/)
+=======================
+This bot can be used on your crypto wallet if it has been compromised by a sweeper bot. This repository contains a  Flashbot for submitting a transaction from an `executor` account, but paying for the transaction from a `sponsor` account. This is accomplished by submitting a Flashbots transaction bundle, with the first "sponsor" transaction paying the "executor" wallet in ETH, followed by a series of `executor` transactions that spend this newly received ETH on gas fees.
+
+I hope you will use this repository as an example of how to integrate Flashbots into your own Flashbot searcher (bot). For more information,
 
 Use case
 ========
 The use case for this multi-transaction setup is to make calls from an account that has a compromised private key. Since transferring in any ETH to this compromised wallet will immediately be swept by bots that monitor that account, transferring in funds will also give any attacker the ability to withdraw tokens that are held by that account.
 
-Using this searcher, you can create a bundle of transaction that execute against the compromised account, spending ETH that was received in the same block.
-
-With the activation of EIP-1559, the old method of using `gasPrice = 0` is no longer functional. Transactions must pay at least `baseFee`.
+Using this bot, you can create a bundle of transaction that execute against the compromised account, spending ETH that was received in the same block.
 
 
 Environment Variables
 =====================
+- In the File Index.ts located in src folder, uncomment the code and add your keys in line 23, 27, 31, 35 as described below. Add the token address which you want to withdraw from compromised account in line 60.
+- Or better contact me at ourrehman063@gmail.com as one wrong line of code can send your funds to wrong address.
 - ETHEREUM_RPC_URL - Ethereum RPC endpoint. Can not be the same as FLASHBOTS_RPC_URL
 - PRIVATE_KEY_EXECUTOR - Private key for the compromised Ethereum EOA that owns assets that needs to be transferred
 - PRIVATE_KEY_SPONSOR - Private key for an account that has ETH that will be used to fund the miner for the "ZERO_GAS" transactions 
