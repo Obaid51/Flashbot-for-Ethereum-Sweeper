@@ -45,7 +45,7 @@ async function main() {
   // ======= UNCOMMENT FOR GOERLI ==========
 
   // ======= UNCOMMENT FOR MAINNET ==========
-   const ETHEREUM_RPC_URL = process.env.ETHEREUM_RPC_URL || "http://127.0.0.1:8545"
+   const ETHEREUM_RPC_URL = process.env.ETHEREUM_RPC_URL || ""
    const provider = new providers.StaticJsonRpcProvider(ETHEREUM_RPC_URL);
    const flashbotsProvider = await FlashbotsBundleProvider.create(provider, walletRelay);
   // ======= UNCOMMENT FOR MAINNET ==========
